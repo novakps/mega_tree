@@ -71,7 +71,7 @@ router.get('/data/:id', function(req, res, next) {
     collection
     .aggregate( [ { $match: {parent: id}},
                   { $sort: {left: 1} },
-                  { $project: {name: 1} }
+                  { $project: {name: 1, leaf: 1} }
                 ] )
     .then(function(items) {
       res.json(items);
