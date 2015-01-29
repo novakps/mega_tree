@@ -32,7 +32,7 @@ Ext.onReady(function() {
     },
     buffered: true,
     folderSort: false,
-    remoteFilter: true // does nothing for a treestore
+    remoteFilter: true 
   });
 
   var tree = Ext.create('Ext.tree.Panel', {

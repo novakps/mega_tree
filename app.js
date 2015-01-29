@@ -11,19 +11,12 @@ var db = mongo('mongodb://localhost:27017/dummydata');
 var nested_set = require('./routes/nested_set');
 var kitchen_sink = require('./routes/kitchen_sink');
 
-var users = require('./routes/users');
-var build_data = require('./routes/build_data');
-var folders = require('./routes/folders');
-var folder_search = require('./routes/folder_search');
-
 var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
-// uncomment after placing your favicon in /public
-//app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -38,10 +31,6 @@ app.use(function(req,res,next){
 
 app.use('/nested_set', nested_set);
 app.use('/kitchen_sink', kitchen_sink);
-
-//app.use('/build_data', build_data);
-//app.use('/folders', folders);
-//app.use('/folder_search', folder_search);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
