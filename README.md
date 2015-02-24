@@ -2,7 +2,8 @@
 Setup
  - npm install
  - apt-get install mongodb-server
- - mongodb --dbpath data
+ - mkdir data
+ - mongod --dbpath data
  - virtualenv env
  - source env/bin/activate
  - pip install -r requirements.txt
