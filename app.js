@@ -8,8 +8,9 @@ var bodyParser = require('body-parser');
 var mongo = require('promised-mongo');
 var db = mongo('mongodb://localhost:27017/dummydata');
 
-var nested_set = require('./routes/nested_set');
-var kitchen_sink = require('./routes/kitchen_sink');
+var folder_search = require('./routes/folder_search');
+var assays = require('./routes/assays');
+var tree_view = require('./routes/tree_view');
 
 var app = express();
 
@@ -18,9 +19,9 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
 app.use(logger('dev'));
+app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
+
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Make our db accessible to our router
@@ -29,8 +30,9 @@ app.use(function(req,res,next){
     next();
 });
 
-app.use('/nested_set', nested_set);
-app.use('/kitchen_sink', kitchen_sink);
+app.use('/api/column_tree', folder_search);
+app.use('/api/assays', assays);
+app.use('/view', tree_view);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

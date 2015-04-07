@@ -62,6 +62,8 @@ router.get('/data/:id', function(req, res, next) {
     .then(function(node) {
       res.json(node);
     });
+  } else if (req.params.id == 'root') {
+    res.json([]);
   } else {
     // return direct children nodes
     var id = req.params.id
@@ -79,7 +81,7 @@ router.get('/data/:id', function(req, res, next) {
   }
 });
 
-/* GET html */
+/* Get html */
 router.get('/view', function(req, res, next) {
     res.render('index', { title: 'Kitchen Sink' }); 
 });

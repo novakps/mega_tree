@@ -9,30 +9,34 @@ Ext.require([
 Ext.onReady(function() {
   Ext.QuickTips.init();
 
+  Ext.define('CustomProxy', {
+    extend: 'Ext.data.proxy.Rest',
+    url: 'api/column_tree/search',
+    paramsAsJson: true,
+    actionMethods: {
+        create : 'POST',
+        read   : 'POST',
+        update : 'POST',
+        destroy: 'POST'
+    }
+  });
+
   Ext.define('NodeModel', {
     extend: 'Ext.data.TreeModel',
     fields: [
       { name: '_id'},
-      { name: 'text', mapping: 'name'},
-      { name: 'children'}
+      { name: 'text', mapping: 'name'}
     ],
     idProperty: '_id',
-    proxy: {
-      type: 'rest',
-      url: 'data'
-    }
+    proxy: new CustomProxy()
   });
 
   var store  = Ext.create('Ext.data.TreeStore', {
     model: 'NodeModel',
     root: {
-      text: 'root',
-      _id: '0',
+      name: 'Assays',
       expanded: true
-    },
-    buffered: true,
-    folderSort: false,
-    remoteFilter: true 
+    }
   });
 
   var tree = Ext.create('Ext.tree.Panel', {
@@ -69,5 +73,4 @@ Ext.onReady(function() {
       input.setValue('');
     }
   });
-  
 });
