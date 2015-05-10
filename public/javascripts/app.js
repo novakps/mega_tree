@@ -11,11 +11,13 @@ Ext.onReady(function() {
 
   Ext.define('CustomProxy', {
     extend: 'Ext.data.proxy.Rest',
-    url: 'api/column_tree/search',
+    url: 'api/column_tree',
+    //url: 'api/column_tree/search',
     paramsAsJson: true,
     actionMethods: {
         create : 'POST',
-        read   : 'POST',
+        read   : 'GET',
+        //read   : 'POST',
         update : 'POST',
         destroy: 'POST'
     }
@@ -36,7 +38,8 @@ Ext.onReady(function() {
     root: {
       name: 'Assays',
       expanded: true
-    }
+    },
+    defaultRootId: 0
   });
 
   var tree = Ext.create('Ext.tree.Panel', {

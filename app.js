@@ -9,7 +9,6 @@ var mongo = require('promised-mongo');
 var db = mongo('mongodb://localhost:27017/dummydata');
 
 var folder_search = require('./routes/folder_search');
-var assays = require('./routes/assays');
 var tree_view = require('./routes/tree_view');
 
 var app = express();
@@ -30,8 +29,7 @@ app.use(function(req,res,next){
     next();
 });
 
-app.use('/api/column_tree', folder_search);
-app.use('/api/assays', assays);
+app.use('/api/column_tree/search', folder_search);
 app.use('/view', tree_view);
 
 // catch 404 and forward to error handler
